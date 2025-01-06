@@ -55,6 +55,7 @@ config :explorer, Explorer.Migrator.ReindexInternalTransactionsWithIncompatibleS
 config :explorer, Explorer.Migrator.SanitizeDuplicatedLogIndexLogs, enabled: false
 config :explorer, Explorer.Migrator.RefetchContractCodes, enabled: false
 config :explorer, Explorer.Migrator.BackfillMultichainSearchDB, enabled: false
+config :explorer, Explorer.Migrator.HeavyIndexOperations.AddLogsBlockHashIndex, enabled: false
 
 config :explorer,
   realtime_events_sender: Explorer.Chain.Events.SimpleSender
