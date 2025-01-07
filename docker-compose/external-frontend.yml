@@ -29,11 +29,15 @@ services:
     links:
       - db:database
     environment:
-        ETHEREUM_JSONRPC_VARIANT: 'ganache'
-        ETHEREUM_JSONRPC_WS_URL: ws://host.docker.internal:8545/
-        INDEXER_DISABLE_INTERNAL_TRANSACTIONS_FETCHER: 'true'
-        INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER: 'true'
-        CHAIN_ID: '1337'
+        ETHEREUM_JSONRPC_VARIANT: 'geth'
+        ETHEREUM_JSONRPC_HTTP_URL: http://145.223.117.77:9944
+        ETHEREUM_JSONRPC_WS_URL: ws://145.223.117.77:9944
+        INDEXER_DISABLE_INTERNAL_TRANSACTIONS_FETCHER: 'false'
+        INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER: 'false'
+        CHAIN_ID: '1013'
+        SUBNETWORK: 'Global Network Foundation'
+        NETWORK: 'Global Network Foundation'
+        API_V2_ENABLED: 'true'
 
   visualizer:
     extends:

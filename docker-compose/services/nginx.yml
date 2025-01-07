@@ -8,13 +8,14 @@ services:
       - 'host.docker.internal:host-gateway'
     volumes:
       - "../proxy:/etc/nginx/templates"
+      - "./ssl:/etc/nginx/ssl"
+      - "./certbot/conf:/etc/letsencrypt"
+      - "./certbot/www:/var/www/certbot"
     environment:
       BACK_PROXY_PASS: ${BACK_PROXY_PASS:-http://backend:4000}
       FRONT_PROXY_PASS: ${FRONT_PROXY_PASS:-http://frontend:3000}
     ports:
-      - target: 80
-        published: 80
-      - target: 8080
-        published: 8080
-      - target: 8081
-        published: 8081
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+      - "8081:8081"
