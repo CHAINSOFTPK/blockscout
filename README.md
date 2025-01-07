@@ -38,7 +38,7 @@ See the [project documentation](https://docs.blockscout.com/) for instructions:
 
 ## Acknowledgements
 
-We would like to thank the EthPrize foundation for their funding support.
+hi  would like to thank the EthPrize foundation for their funding support.
 
 ## Contributing
 
