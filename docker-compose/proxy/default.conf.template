@@ -1,33 +1,12 @@
 map $http_upgrade $connection_upgrade {
-    default upgrade;
-    ''      close;
+
+  default upgrade;
+  ''      close;
 }
 
 server {
-    listen 80;
-    listen [::]:80;
-    server_name scan.globalnetwork.foundation;
-    
-    location /.well-known/acme-challenge/ {
-        root /var/www/certbot;
-    }
-
-    location / {
-        return 301 https://$host$request_uri;
-    }
-}
-
-server {
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    server_name scan.globalnetwork.foundation;
-
-    ssl_certificate /etc/letsencrypt/live/scan.globalnetwork.foundation/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/scan.globalnetwork.foundation/privkey.pem;
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
-    ssl_prefer_server_ciphers off;
-    
+    listen       80;
+    server_name  77.37.122.13;  # Changed from localhost
     proxy_http_version 1.1;
 
     location ~ ^/(api(?!-docs$)|socket|sitemap.xml|auth/auth0|auth/auth0/callback|auth/logout) {
@@ -53,14 +32,13 @@ server {
         proxy_cache_bypass    $http_upgrade;
     }
 }
-
 server {
     listen       8080;
-    server_name  scan.globalnetwork.foundation;
+    server_name  77.37.122.13;  # Changed from localhost
     proxy_http_version 1.1;
     proxy_hide_header Access-Control-Allow-Origin;
     proxy_hide_header Access-Control-Allow-Methods;
-    add_header 'Access-Control-Allow-Origin' 'https://scan.globalnetwork.foundation' always;
+    add_header 'Access-Control-Allow-Origin' 'http://77.37.122.13:3000' always;  # Changed from localhost
     add_header 'Access-Control-Allow-Credentials' 'true' always;
     add_header 'Access-Control-Allow-Methods' 'PUT, GET, POST, OPTIONS, DELETE, PATCH' always;
 
@@ -76,14 +54,13 @@ server {
         proxy_cache_bypass    $http_upgrade;
     }
 }
-
 server {
     listen       8081;
-    server_name  scan.globalnetwork.foundation;
+    server_name  77.37.122.13;  # Changed from localhost
     proxy_http_version 1.1;
     proxy_hide_header Access-Control-Allow-Origin;
     proxy_hide_header Access-Control-Allow-Methods;
-    add_header 'Access-Control-Allow-Origin' 'https://scan.globalnetwork.foundation' always;
+    add_header 'Access-Control-Allow-Origin' 'http://77.37.122.13:3000' always;  # Changed from localhost
     add_header 'Access-Control-Allow-Credentials' 'true' always;
     add_header 'Access-Control-Allow-Methods' 'PUT, GET, POST, OPTIONS, DELETE, PATCH' always;
     add_header 'Access-Control-Allow-Headers' 'DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,x-csrf-token' always;
@@ -103,7 +80,7 @@ server {
         proxy_set_header      Connection $connection_upgrade;
         proxy_cache_bypass    $http_upgrade;
         if ($request_method = 'OPTIONS') {
-            add_header 'Access-Control-Allow-Origin' 'https://scan.globalnetwork.foundation' always;
+            add_header 'Access-Control-Allow-Origin' 'http://77.37.122.13:3000' always;  # Changed from localhost
             add_header 'Access-Control-Allow-Credentials' 'true' always;
             add_header 'Access-Control-Allow-Methods' 'PUT, GET, POST, OPTIONS, DELETE, PATCH' always;
             add_header 'Access-Control-Allow-Headers' 'DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,x-csrf-token' always;
