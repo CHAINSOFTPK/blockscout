@@ -4,17 +4,22 @@ services:
   proxy:
     image: nginx
     container_name: proxy
+    networks:
+      - blockscout
+    depends_on:
+      - backend
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     volumes:
       - "../proxy:/etc/nginx/templates"
     environment:
       BACK_PROXY_PASS: ${BACK_PROXY_PASS:-http://backend:4000}
-      FRONT_PROXY_PASS: ${FRONT_PROXY_PASS:-http://77.37.122.13:3000}  # Changed to point to your VPS frontend
+      FRONT_PROXY_PASS: ${FRONT_PROXY_PASS:-http://77.37.122.13:3000}
     ports:
-      - target: 80
-        published: 80
-      - target: 8080
-        published: 8080
-      - target: 8081
-        published: 8081
+      - "80:80"
+      - "8080:8080"
+      - "8081:8081"
+
+networks:
+  blockscout:
+    driver: bridg
